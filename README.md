@@ -1,6 +1,6 @@
 # PyNoise
 
-What PyNoise is.
+What is PyNoise?
 
 PyNoise is a simple script written in Python that runs in the background visiting random websites for you.
 
