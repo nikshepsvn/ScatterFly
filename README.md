@@ -21,7 +21,7 @@ Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestio
 ![PyNoise Running](https://i.imgur.com/jF82ACF.png "PyNoise Running")
 
 
-----------------------------------------------------------------------------------------
+
 PyNoise was inspired by : https://slifty.github.io/internet_noise/index.html
 ----------------------------------------------------------------------------------------
 
