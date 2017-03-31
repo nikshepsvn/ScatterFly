@@ -17,3 +17,5 @@ How do I use it?
 4. close the window when your done
 
 Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestions!
+
+![PyNoise Running](https://i.imgur.com/jF82ACF.png "PyNoise Running")
