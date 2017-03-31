@@ -13,7 +13,7 @@ How do I use it?
 
 1. Clone the repo
 2. install the only dependency, selenium (pip install selenium)
-3. run the script (python make_noise.py) when you start browsing the interet
+3. run the script (python make_noise.py) when you start browsing the internet
 4. close the window when your done
 
 Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestions!
