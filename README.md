@@ -20,7 +20,9 @@ Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestio
 
 ![PyNoise Running](https://i.imgur.com/jF82ACF.png "PyNoise Running")
 
-
+Current Version V0.02
+- V0.02 Changelog : added feature for bot to create noise on reddit -- making info from reddit harder to analyze.
+- V0.01 Changelog : First version of bot, Uses WPI's random link generator to visit random sites on the internet.
 
 PyNoise was inspired by : https://slifty.github.io/internet_noise/index.html
 ----------------------------------------------------------------------------------------
