@@ -1,4 +1,4 @@
-#necassary imports
+#necassary imports for PyNoise
 import os, sys
 import json
 import urllib2
@@ -10,7 +10,7 @@ from selenium import webdriver
 #initializing drivers
 print("Starting drivers ... ")
 
-# chrome/chromedriver doesn't support RPi
+# checking if user is attempting to run pynoise on a RPi, and if so, initializing different drivers.
 if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
     if not os.getenv('DISPLAY'):
         print("make sure to start a virtual display:")
@@ -18,22 +18,24 @@ if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
         print("export DISPLAY=:99")
         sys.exit(1)
 
+    #adding user agent and headless argument to browser
     from selenium.webdriver.firefox.options import Options
     firefox_options = Options()
     firefox_options.add_argument("--headless")
     firefox_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
 
+    #initializing driver
     p = os.getcwd() + '/geckodriver_arm7'
     driver = webdriver.Firefox(executable_path=p, firefox_options=firefox_options)
 
 else:
-    #setting up driver to simulate user and also start chrome in background
+    #adding user agent and headless argument to browser
     from selenium.webdriver.chrome.options import Options
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
 
-    #choosing chrome driver based on OS
+    #choosing chrome driver based on OS and initializing it for further use
     if 'Linux' in (platform.system()):
         driver = webdriver.Chrome(os.getcwd()+'/chromedriver_linux',chrome_options=chrome_options)
     elif 'Windows' in (platform.system()):
@@ -43,9 +45,9 @@ else:
 
 
 #starting pynoise..
-print "Generating some random trafific...."
+print "PyNoise is now going to start generating some random traffic."
 
-#asking user for input on which sites they browse so pynoise can do a better job contaminating data
+#asking user for input on which sites users browse to improve pynoise's ability to contaminate the data
 print '''Please select which of these sites you visit most often (choose all that is applicable) (input S when you're finished):
 1. Reddit
 2. Facebook
@@ -54,6 +56,7 @@ print '''Please select which of these sites you visit most often (choose all tha
 5. Amazon
 6. Ebay'''
 
+#creating an AL link user input and fucntions
 sites_dict = {
     '0': 'randomsite()',
     '1': 'randomreddit()',
@@ -77,7 +80,7 @@ while(1):
 
 #function to visit random webpages on the internet
 def randomsite():
-    # uroulette url sometimes changes?
+    # uroulette url sometimes changes -- implement a selenium viist site and scrape url fix
     site = "http://www.uroulette.com/visit/onvpu"
     driver.get(site)
     time.sleep(randint(0,7))
