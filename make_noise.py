@@ -75,7 +75,7 @@ while(1):
     if (x != "S"):
         linklist.append(x)
     else:
-        print "You have succesfully entered " + (str(len(linklist))) + " sites."
+        print "You have succesfully entered " + (str(len(linklist)-1)) + " sites."
         break;
 
 #function to visit random webpages on the internet
@@ -113,9 +113,13 @@ def random_amazon():
     print("Amazon not implemented yet ... ")
 
 def random_ebay():
-    print("Ebay not implemented yet ... ")
-
+    driver.get("http://kice.me/randomebay/")
+    element = driver.find_element_by_tag_name('a')
+    element.click();
+    time.sleep(randint(0,7))
+    print "currently on site: " + driver.current_url
 # loop to start the functions and visits
 while(1):
-    rnd_site = choice(linklist)
-    eval(sites_dict[rnd_site])
+    #rnd_site = choice(linklist)
+    #eval(sites_dict[rnd_site])
+    random_ebay()
