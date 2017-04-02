@@ -40,3 +40,9 @@ PyNoise was inspired by : https://slifty.github.io/internet_noise/index.html
 ----------------------------------------------------------------------------------------
 
 The difference between the above project and PyNoise is that pynoise can be launched from your terminal and runs in the background meaning it doesnt open up a browser window or new tabs -- so it doesn't distract you from work or confuse you while it's running. PyNoise also randomizes the time of each visit, so it's harder to differentiate the traffic.
+
+
+#TODO:
+1) Use DeepLearning to generate User Profile.
+2) Make PyNoise Hook up to existing browser instance.
+3) Finish other common site randomizers.
