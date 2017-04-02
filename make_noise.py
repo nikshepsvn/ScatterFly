@@ -120,6 +120,5 @@ def random_ebay():
     print "currently on site: " + driver.current_url
 # loop to start the functions and visits
 while(1):
-    #rnd_site = choice(linklist)
-    #eval(sites_dict[rnd_site])
-    random_ebay()
+    rnd_site = choice(linklist)
+    eval(sites_dict[rnd_site])
