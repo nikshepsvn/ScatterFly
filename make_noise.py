@@ -1,5 +1,5 @@
 #necassary imports
-import os
+import os, sys
 import json
 import urllib2
 import platform
@@ -14,8 +14,9 @@ print("Starting drivers ... ")
 if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
     if not os.getenv('DISPLAY'):
         print("make sure to start a virtual display:")
-        print("Xfvb :99 -ac &")
+        print("Xvfb :99 -ac &")
         print("export DISPLAY=:99")
+        sys.exit(1)
 
     from selenium.webdriver.firefox.options import Options
     firefox_options = Options()
