@@ -4,7 +4,7 @@ import json
 import urllib2
 import platform
 import time
-from random import randint
+from random import choice, randint
 from selenium import webdriver
 
 #initializing drivers
@@ -54,8 +54,19 @@ print '''Please select which of these sites you visit most often (choose all tha
 5. Amazon
 6. Ebay'''
 
+sites_dict = {
+    '0': 'randomsite()',
+    '1': 'randomreddit()',
+    '2': 'random_fb()',
+    '3': 'random_youtube()',
+    '4': 'random_tumblr()',
+    '5': 'random_amazon()',
+    '6': 'random_ebay()'
+}
+
 #loop to input the data
-linklist = []
+# start with randomsite as default
+linklist = ['0']
 while(1):
     x = raw_input()
     if (x != "S"):
@@ -66,9 +77,11 @@ while(1):
 
 #function to visit random webpages on the internet
 def randomsite():
-        driver.get("http://www.uroulette.com/visit/oqvsoq")
-        time.sleep(randint(0,7))
-        print "currently on site: " + driver.current_url
+    # uroulette url sometimes changes?
+    site = "http://www.uroulette.com/visit/onvpu"
+    driver.get(site)
+    time.sleep(randint(0,7))
+    print "currently on site: " + driver.current_url
 
 #function to randomly visit a subreddit and then browse through it
 def randomreddit():
@@ -84,7 +97,22 @@ def randomreddit():
     print "currently on site: " + driver.current_url
     time.sleep(randint(0,4))
 
+def random_fb():
+    print("Facebook not implemented yet ... ")
+
+def random_youtube():
+    print("Youtube not implemented yet ... ")
+
+def random_tumblr():
+    print("Tumblr not implemented yet ... ")
+
+def random_amazon():
+    print("Amazon not implemented yet ... ")
+
+def random_ebay():
+    print("Ebay not implemented yet ... ")
+
 # loop to start the functions and visits
 while(1):
-    if '1' in linklist:
-        randomreddit()
+    rnd_site = choice(linklist)
+    eval(sites_dict[rnd_site])
