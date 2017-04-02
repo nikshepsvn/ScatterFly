@@ -7,24 +7,42 @@ import time
 from random import randint
 from selenium import webdriver
 
+#initializing drivers
+print("Starting drivers ... ")
+
+# chrome/chromedriver doesn't support RPi
+if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
+    if not os.getenv('DISPLAY'):
+        print("make sure to start a virtual display:")
+        print("Xfvb :99 -ac &")
+        print("export DISPLAY=:99")
+
+    from selenium.webdriver.firefox.options import Options
+    firefox_options = Options()
+    firefox_options.add_argument("--headless")
+    firefox_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+
+    p = os.getcwd() + '/geckodriver_arm7'
+    driver = webdriver.Firefox(executable_path=p, firefox_options=firefox_options)
+
+else:
+    #setting up driver to simulate user and also start chrome in background
+    from selenium.webdriver.chrome.options import Options
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+
+    #choosing chrome driver based on OS
+    if 'Linux' in (platform.system()):
+        driver = webdriver.Chrome(os.getcwd()+'/chromedriver_linux',chrome_options=chrome_options)
+    elif 'Windows' in (platform.system()):
+        driver = webdriver.Chrome(os.getcwd()+'/chromedriver.exe',chrome_options=chrome_options)
+    elif 'Darwin' in (platform.system()):
+        driver = webdriver.Chrome(os.getcwd()+'/chromedriver_mac',chrome_options=chrome_options)
+
+
 #starting pynoise..
 print "Generating some random trafific...."
-
-
-#setting up driver to simulate user and also start chrome in background
-from selenium.webdriver.chrome.options import Options
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
-
-#choosing chrome driver based on OS
-if 'Linux' in (platform.system()):
-    driver = webdriver.Chrome(os.getcwd()+'/chromedriver_linux',chrome_options=chrome_options)
-elif 'Windows' in (platform.system()):
-    driver = webdriver.Chrome(os.getcwd()+'/chromedriver.exe',chrome_options=chrome_options)
-elif 'Darwin' in (platform.system()):
-    driver = webdriver.Chrome(os.getcwd()+'/chromedriver_mac',chrome_options=chrome_options)
-
 
 #asking user for input on which sites they browse so pynoise can do a better job contaminating data
 print '''Please select which of these sites you visit most often (choose all that is applicable) (input S when you're finished):
