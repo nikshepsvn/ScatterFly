@@ -42,7 +42,7 @@ ScatterFly was inspired by : https://slifty.github.io/internet_noise/index.html
 The difference between the above project and ScatterFly is that ScatterFly can be launched from your terminal and runs in the background meaning it doesnt open up a browser window or new tabs -- so it doesn't distract you from work or confuse you while it's running. ScatterFly also randomizes the time of each visit, so it's harder to differentiate the traffic.
 
 
-###TODO:
+### TODO:
 1) Use DeepLearning to generate User Profile.
 2) Make ScatterFly Hook up to existing browser instance.
 3) Finish other common site randomizers.
