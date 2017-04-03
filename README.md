@@ -1,5 +1,6 @@
 # Scatterly
 [Previously PyNoise]
+
 What is Scatterly?
 
 Scatterly is a simple script written in Python that runs in the background visiting random websites for you.
