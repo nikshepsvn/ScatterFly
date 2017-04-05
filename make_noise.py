@@ -7,7 +7,7 @@ import time
 from random import choice, randint
 from selenium import webdriver
 
-
+#TODO, custom random link generator using noun list
 with open(os.getcwd()+'/data/nounlist.txt') as f:
     words = f.read().splitlines()
 
@@ -124,7 +124,7 @@ def random_ebay():
     time.sleep(randint(0,7))
     print "currently on site: " + driver.current_url
 
-def start_noise():
+def start_noise(linklist, sites_dict):
     # loop to start the functions and visits
     while(1):
         rnd_site = choice(linklist)
@@ -132,6 +132,6 @@ def start_noise():
 
 if __name__ == "__main__":
     driver = init_drivers()
-    linklist, sites_dict= get_input()
+    linklist, sites_dict = get_input()
     print "ScatterFly is now going to start generating some random traffic."
-    start_noise()
+    start_noise(linklist, sites_dict)
