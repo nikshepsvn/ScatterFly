@@ -118,11 +118,19 @@ def random_amazon():
     print("Amazon not implemented yet ... ")
 
 def random_ebay():
-    driver.get("http://kice.me/randomebay/")
-    element = driver.find_element_by_tag_name('a')
-    element.click();
-    time.sleep(randint(0,7))
-    print "currently on site: " + driver.current_url
+    iterations = randint(1,8)
+    count = 0
+    while(1):
+        driver.get("http://kice.me/randomebay/")
+        element = driver.find_element_by_tag_name('a')
+        element.click();
+        time.sleep(randint(0,7))
+        print "currently on site: " + driver.current_url
+        count = count +1
+        if count == iterations:
+            break;
+
+
 
 def start_noise(linklist, sites_dict):
     # loop to start the functions and visits
