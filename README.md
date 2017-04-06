@@ -1,5 +1,5 @@
 # ScatterFly (previously PyNoise)
-
+(https://i.imgur.com/4Jx3kyC.png)
 What is ScatterFly?
 
 ScatterFly is a program written in Python that runs in the background visiting random websites for you.
