@@ -1,5 +1,5 @@
 # ScatterFly (previously PyNoise)
-[](https://i.imgur.com/4Jx3kyC.png)
+![](https://i.imgur.com/4Jx3kyC.png)
 
 What is ScatterFly?
 
