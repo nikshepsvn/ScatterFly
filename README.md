@@ -1,6 +1,7 @@
 # ScatterFly (previously PyNoise)
-![](https://i.imgur.com/4Jx3kyC.png)
-
+<p align="center">
+  <img src = "https://i.imgur.com/4Jx3kyC.png" />
+</p>
 What is ScatterFly?
 
 ScatterFly is a program written in Python that runs in the background visiting random websites for you.
