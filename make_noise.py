@@ -114,7 +114,18 @@ def random_tumblr():
     print("Tumblr not implemented yet ... ")
 
 def random_amazon():
-    print("Amazon not implemented yet ... ")
+    iterations = randint(1,8)
+    count = 0
+    while(1):
+        item = words[randint(0,len(words))]
+        driver.get("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords="+item)
+        element = driver.find_element_by_class_name('s-access-detail-page')
+        element.click()
+        time.sleep(randint(2,7))
+        print "currently on site: " + driver.current_url
+        count = count +1
+        if count == iterations:
+            break;
 
 #function to open up a random items on Ebay
 #TODO remove dependency and make it go through similar items
