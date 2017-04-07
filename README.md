@@ -28,6 +28,7 @@ $ python make_noise.py              # make some noise!
 ```
 
 <p align="center">
+  ScatterFly Running 
   <img src = "https://i.imgur.com/jF82ACF.png" />
 </p>
 
