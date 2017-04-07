@@ -1,4 +1,3 @@
-# ScatterFly (previously PyNoise)
 <p align="center">
   <img src = "https://i.imgur.com/4Jx3kyC.png" />
 </p>
