@@ -28,8 +28,8 @@ $ python make_noise.py              # make some noise!
 ```
 
 <p align="center">
-  ScatterFly Running 
   <img src = "https://i.imgur.com/jF82ACF.png" />
+  <br>   ScatterFly Running 
 </p>
 
 ### Current Version V0.05
