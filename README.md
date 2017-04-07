@@ -1,11 +1,11 @@
 <p align="center">
   <img src = "https://i.imgur.com/4Jx3kyC.png" />
 </p>
-What is ScatterFly?
+### What is ScatterFly?
 
 ScatterFly is a program written in Python that runs in the background visiting random websites for you.
 
-Why would I want that?
+### Why would I want that?
 
 On March 29th congress passed a law that makes it legal for your Internet Service Providers (ISP) to track and sell your personal activity online. This means that things you search for, buy, read, and say can be collected by corporations and used against you. ScatterFly contaminates your data with the random websites it visits to make it harder for them to analyze your data.
 source : https://www.govtrack.us/congress/votes/115-2017/h202
@@ -32,7 +32,7 @@ Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestio
 
 ![ScatterFly Running](https://i.imgur.com/jF82ACF.png "ScatterFly Running")
 
-Current Version V0.05
+### Current Version V0.05
 - V0.05 Changelog : code clean up and modularization
 - V0.04 Changelog : added feature for bot to create noise on ebay -- making shopping data from ebay harder to analyze.
 - V0.03 Changelog : added RPi (Firefox) support
@@ -40,7 +40,6 @@ Current Version V0.05
 - V0.01 Changelog : First version of bot, Uses WPI's random link generator to visit random sites on the internet.
 
 ScatterFly was inspired by : https://slifty.github.io/internet_noise/index.html
-----------------------------------------------------------------------------------------
 
 The difference between the above project and ScatterFly is that ScatterFly can be launched from your terminal and runs in the background meaning it doesnt open up a browser window or new tabs -- so it doesn't distract you from work or confuse you while it's running. ScatterFly also randomizes the time of each visit, so it's harder to differentiate the traffic.
 
