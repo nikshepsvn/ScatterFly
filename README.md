@@ -26,7 +26,10 @@ $ Xvfb :99 -ac &                    # run a virtual display on port 99
 $ export DISPLAY=:99                # set the display environment variable
 $ python make_noise.py              # make some noise!
 ```
-![ScatterFly Running](https://i.imgur.com/jF82ACF.png "ScatterFly Running")
+
+<p align="center">
+  <img src = "https://i.imgur.com/jF82ACF.png" />
+</p>
 
 ### Current Version V0.05
 - V0.05 Changelog : code clean up and modularization
