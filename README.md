@@ -26,9 +26,6 @@ $ Xvfb :99 -ac &                    # run a virtual display on port 99
 $ export DISPLAY=:99                # set the display environment variable
 $ python make_noise.py              # make some noise!
 ```
-
-Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestions!
-
 ![ScatterFly Running](https://i.imgur.com/jF82ACF.png "ScatterFly Running")
 
 ### Current Version V0.05
@@ -48,3 +45,5 @@ The difference between the above project and ScatterFly is that ScatterFly can b
 2) Make ScatterFly Hook up to existing browser instance.
 3) Finish other common site randomizers.
 4) Reduce and replace dependencies as much as possible (urlroullete and other 3rd party sites)
+
+### Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestions!
