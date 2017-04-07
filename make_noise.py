@@ -3,6 +3,8 @@ import os, sys, time, urllib2, platform, json
 from random import choice, randint
 from selenium import webdriver
 import bs4 as bs
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 #TODO, custom random link generator using noun list
 #opening file that contains a list of nouns and assigning it to a list
@@ -26,6 +28,7 @@ def init_drivers():
         from selenium.webdriver.firefox.options import Options
         firefox_options = Options()
         firefox_options.add_argument("--headless")
+        firefox_options.add_argument("--mute-audio")
         firefox_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
 
         #initializing the driver for RPi
@@ -37,6 +40,7 @@ def init_drivers():
         from selenium.webdriver.chrome.options import Options
         chrome_options = Options()
         chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--mute-audio")
         chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
 
         #choosing chrome driver based on OS and initializing it for further use
@@ -52,21 +56,19 @@ def get_input():
     #asking user for input on which sites users browse to improve ScatterFly's ability to contaminate the data
     print '''Please select which of these sites you visit most often (choose all that is applicable) (input S when you're finished):
     1. Reddit
-    2. Facebook
-    3. YouTube
-    4. Tumblr
-    5. Amazon
-    6. Ebay'''
+    2. YouTube
+    3. Tumblr
+    4. Amazon
+    5. Ebay'''
 
     #creating an AL link user input and functions
     sites_dict = {
         '0': 'randomsite()',
         '1': 'randomreddit()',
-        '2': 'random_fb()',
-        '3': 'random_youtube()',
-        '4': 'random_tumblr()',
-        '5': 'random_amazon()',
-        '6': 'random_ebay()'
+        '2': 'random_youtube()',
+        '3': 'random_tumblr()',
+        '4': 'random_amazon()',
+        '5': 'random_ebay()'
     }
 
     #loop to input the data
@@ -104,14 +106,37 @@ def randomreddit():
     print "currently on site: " + driver.current_url
     time.sleep(randint(0,4))
 
-def random_fb():
-    print("Facebook not implemented yet ... ")
-
 def random_youtube():
-    print("Youtube not implemented yet ... ")
+    iterations = randint(1,8)
+    count = 0
+    while(1):
+        item = words[randint(0,len(words))]
+        driver.get("https://www.youtube.com/results?search_query="+item)
+        element = driver.find_element_by_class_name('yt-uix-tile-link')
+        element.click()
+        actions = ActionChains(driver)
+        actions.send_keys('K')
+        actions.perform()
+        time.sleep(randint(15,50))
+        print "currently on site: " + driver.current_url
+        count = count +1
+        if count == iterations:
+            break;
+
 
 def random_tumblr():
-    print("Tumblr not implemented yet ... ")
+    iterations = randint(1,8)
+    count = 0
+    while(1):
+        item = words[randint(0,len(words))]
+        driver.get("https://www.tumblr.com/search/"+item)
+        element = driver.find_element_by_class_name('indash_header_wrapper')
+        element.click()
+        time.sleep(randint(5,14))
+        print "currently on site: " + driver.current_url
+        count = count +1
+        if count == iterations:
+            break;
 
 def random_amazon():
     iterations = randint(1,8)
