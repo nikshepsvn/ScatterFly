@@ -18,8 +18,6 @@ source : https://www.govtrack.us/congress/votes/115-2017/h202
 3. run the script (python make_noise.py) when you start browsing the internet
 4. ctrl + x or close the terminal window when you are finished
 ```
-### Headless (Raspberry Pi!)
-
 If you would like to run this project on a Linux server (like a Raspberry Pi) there are a few additional steps:  
 ```bash
 $ sudo apt-get install firefox-esr  # chrome/chromedriver doesn't support RPi
