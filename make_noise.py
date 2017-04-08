@@ -94,13 +94,13 @@ def randomsite():
 
 #function to randomly visit a subreddit and then browse some posts
 def randomreddit():
-    driver.get("http://reddit.com/r/random")
+    driver.get("https://reddit.com/r/random")
     url = driver.current_url+"top/.json?count=10"
     req = urllib2.Request(url, headers={ 'User-Agent': 'Mozilla/5.0' })
     posts = json.loads(urllib2.urlopen(req).read())
     leng = len(posts['data']['children'])
     for i in range(0,leng):
-        driver.get("http://reddit.com"+posts['data']['children'][i]['data']['permalink'])
+        driver.get("https://reddit.com"+posts['data']['children'][i]['data']['permalink'])
         print "currently on site: " + driver.current_url
         time.sleep(randint(0,5))
     print "currently on site: " + driver.current_url
