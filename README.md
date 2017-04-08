@@ -14,7 +14,7 @@ source : https://www.govtrack.us/congress/votes/115-2017/h202
 ### How do I use it?
 ```bash
 1. clone the repo
-2. install the only dependency, selenium (pip install selenium)
+2. install the dependencies (pip install -r requirements.txt)
 3. run the script (python make_noise.py) when you start browsing the internet
 4. ctrl + x or close the terminal window when you are finished
 ```
