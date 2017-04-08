@@ -87,7 +87,7 @@ def get_input():
 #function to visit random webpages on the internet, currently using uroulette
 def randomsite():
     # uroulette url sometimes changes -- implement a selenium viist site and scrape url fix
-    site = "http://www.uroulette.com/visit/onvpu"
+    site = "http://www.uroulette.com/visit/quprs"
     driver.get(site)
     time.sleep(randint(0,7))
     print "currently on site: " + driver.current_url
