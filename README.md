@@ -50,5 +50,6 @@ The difference between the above project and ScatterFly is that ScatterFly can b
 2) Make ScatterFly Hook up to existing browser instance.
 3) Finish other common site randomizers.
 4) Reduce and replace dependencies as much as possible (urlroullete and other 3rd party sites)
+5) Click on all ads on any particular website to give more false leads
 
 ### Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestions!
