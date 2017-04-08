@@ -4,11 +4,11 @@
 
 ### What is ScatterFly?
 
-ScatterFly is a program written in Python that runs in the background visiting random websites for you.
+ScatterFly is a program designed to make it harder for ISP's to sell or analyze your personal data by intelligently obfuscating it.
 
-### Why would I want that?
+### Wait, ISP's can sell my personal data?
 
-On March 29th congress passed a law that makes it legal for your Internet Service Providers (ISP) to track and sell your personal activity online. This means that things you search for, buy, read, and say can be collected by corporations and used against you. ScatterFly contaminates your data with the random websites it visits to make it harder for them to analyze your data.
+On March 29th congress passed a law that makes it legal for your Internet Service Providers (ISP) to track and sell your personal activity online. This means that things you search for, buy, read, and say can be collected by corporations and used against you. ScatterFly contaminates your data with the random websites it visits in an attempt to make it harder for them to analyze your data.
 source : https://www.govtrack.us/congress/votes/115-2017/h202
 
 ### How do I use it?
@@ -32,7 +32,8 @@ $ python make_noise.py              # make some noise!
   <br>   ScatterFly Running 
 </p>
 
-### Current Version V0.05
+### Current Version V0.06
+- V0.06 Changelog : major changes, added amazon, tumblr and youtube!
 - V0.05 Changelog : code clean up and modularization
 - V0.04 Changelog : added feature for bot to create noise on ebay -- making shopping data from ebay harder to analyze.
 - V0.03 Changelog : added RPi (Firefox) support
