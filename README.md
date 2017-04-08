@@ -48,7 +48,7 @@ The difference between the above project and ScatterFly is that ScatterFly can b
 ### TODO:
 1) Use DeepLearning to generate User Profile.
 2) Make ScatterFly Hook up to existing browser instance.
-3) Finish other common site randomizers.
+3̶)̶ ̶F̶i̶n̶i̶s̶h̶ ̶o̶t̶h̶e̶r̶ ̶c̶o̶m̶m̶o̶n̶ ̶s̶i̶t̶e̶ ̶r̶a̶n̶d̶o̶m̶i̶z̶e̶r̶s̶.̶
 4) Reduce and replace dependencies as much as possible (urlroullete and other 3rd party sites)
 5) Click on all ads on any particular website to give more false leads
 
