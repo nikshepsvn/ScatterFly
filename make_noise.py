@@ -9,6 +9,8 @@ import bs4 as bs
 #declaring variable to store current directory path for future use
 currentpath = os.getcwd()
 
+#declaring variable to store the system/os of the user
+sysplatform = platform.system()
 
 #TODO, custom random link generator using noun list
 #opening file that contains a list of nouns and assigning it to a list called words
@@ -23,8 +25,7 @@ def get_random_word():
 
 #function to check and initialize drivers based on system
 def start_drivers():
-    sysplatform = platform.system()
-    print("\nAttempting to initialize drivers....")
+    print("\n\nAttempting to initialize drivers....")
     #if user is using RPi, make sure that the virtual display has been setup or else exit
 
     if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
@@ -45,10 +46,11 @@ def start_drivers():
         firefox_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
         #initializing driver with options
         p = currentpath + '/drivers/geckodriver_arm7'
-        print("\nDrivers for RaspberryPi has been initialized succesfully!")
         return webdriver.Firefox(executable_path = p, firefox_options = firefox_options)
+        print("\nDrivers for RaspberryPi has been initialized succesfully!")
 
-    else: #enters here if device is not a RPi
+    else:
+        #enters here if device is not a RPi
         #creating a chrome options object that is later going to be attached with the driver!
         from selenium.webdriver.chrome.options import Options
         chrome_options = Options()
@@ -56,40 +58,66 @@ def start_drivers():
         chrome_options.add_argument("--mute-audio")
         chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
         #choosing and initializing driver based on OS
+
         if 'Linux' in (sysplatform):
             print("\nDrivers for Linux has been initialized succesfully!")
             return webdriver.Chrome(currentpath +'/drivers/chromedriver_linux',chrome_options = chrome_options)
+
         elif 'Windows' in (sysplatform):
             print("\nDrivers for Windows has been initialized succesfully!")
             return webdriver.Chrome(currentpath +'/drivers/chromedriver.exe',chrome_options = chrome_options)
+
         elif 'Darwin' in (sysplatform):
             print("\nDrivers for OSX has been initialized succesfully!")
             return webdriver.Chrome(currentpath +'/drivers/chromedriver_mac',chrome_options = chrome_options)
 
 
+#function that asks user permission to access previous data
 def request_user_data():
     print("\nScatterFly can use your previous data to make its ability to obfuscate and generate noise more accurate.")
     print("\nThis requires you to give ScatterFly permission to access your previous browsing history.")
     print("\nPlease keep in mind ScatterFly is extremely secure and will not comprimise this data in anyway or form since this data will never leave your machine.")
     permission = input("ScatterFly is requesting permission to acess user data, type 'Yes' to grant permissions or 'No' to deny permission.")
 
-    if permission == "Yes" or permission == "yes" or permission =="y" or permission =="Y":
+    if permission == "Yes" or permission == "yes" or permission == "y" or permission =="Y":
         print("\nScatterFly will now analyze your data to make it's obfuscation more intelligent")
-        activity_data = process_data()
+        activity_data = obtain_data()
+        process_data(activity_data)
         obfuscate(activity_data)
     else:
         print("\nScatterFly has been denied permission to access data, ScatterFly will continue running.")
         obfuscate("empty")
 
+#function that obtains data from browser
+def obtain_data():
+    datapath = NULL
+    def get_chrome_data():
+        if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
+            print("Please copy all the data from your browser user data folder and place it in the root directory of the file in the folder called data")
+        if "Darwin" in sysplatform:
+            datapath = os.path.expanduser('~')+'/Library/Application Support/Google/Chrome/Default'
+        if "Linux" in sysplatform:
+            datapath = os.path.expanduser('~')+'/.config/google-chrome/Default'
+        if "Windows" in sysplatform:
+            datapath = os.path.expanduser('~')+'/AppData/Local/Google/Chrome/User Data/Default'
+
+        if datapath not NULL:
+            print("Data has been found! Now reading data...")
+        else:
+            datapath = input("There was an error finding the data, if you have installed Chrome in a non default directory please input the path to the directory")
+            get_chrome_data()
+            print("Attempting to find data...")
+
 #get_input is a function gets information from the user
 def get_input():
     #asking user for input on which sites users browse to improve ScatterFly's ability to contaminate the data
-    print '''\nPlease select which of these sites you visit most often \n(choose all that is applicable and input S when finished):
+    print '''\nPlease select which of these sites you visit most often \n(choose all that is applicable and input S when finished):\n
     1. Reddit
     2. YouTube
     3. Tumblr
     4. Amazon
-    5. Ebay'''
+    5. Ebay
+    '''
 
     #creating an AL link user input and functions
     sites_dict = {
