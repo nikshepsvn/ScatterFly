@@ -1,55 +1,70 @@
 #necessary imports for ScatterFly
+from selenium.webdriver.common.action_chains import ActionChains
 import os, sys, time, urllib2, platform, json
 from random import choice, randint
 from selenium import webdriver
 import bs4 as bs
-from selenium.webdriver.common.action_chains import ActionChains
+
+
+#declaring variable to store current directory path for future use
+currentpath = os.getcwd()
 
 
 #TODO, custom random link generator using noun list
-#opening file that contains a list of nouns and assigning it to a list
-with open(os.getcwd()+'/data/nounlist.txt') as f:
-    words = f.read().splitlines()
+#opening file that contains a list of nouns and assigning it to a list called words
+with open(currentpath + '/data/nounlist.txt') as data:
+    words = data.read().splitlines()
 
-#function to initialize drivers based on OS and platform
-def init_drivers():
-    print("Starting drivers ... ")
 
-    # checking if user is attempting to run ScatterFly on a RPi, and if so, initializing different drivers.
+#function that returns a random word from the list
+def get_random_word():
+    return words[randint(0,len(words))]
+
+
+#function to check and initialize drivers based on system
+def start_drivers():
+    platform = platform.system()
+    print("Attempting to initialize drivers....")
+    #if user is using RPi, make sure that the virtual display has been setup or else exit
+
     if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
         #if user is running on raspberrypi and hasnt set up xvfb properly print instruction on how to set up and exit code
         if not os.getenv('DISPLAY'):
-            print("make sure to start a virtual display:")
+            print("Please make sure that your virtual display is currently running and try again!")
             print("Xvfb :99 -ac &")
             print("export DISPLAY=:99")
+            print("Exiting Program...")
             sys.exit(1)
 
-        #adding user agent and headless argument to browser
+        #adding options to firefox driver
         from selenium.webdriver.firefox.options import Options
         firefox_options = Options()
-        firefox_options.add_argument("--headless")
-        firefox_options.add_argument("--mute-audio")
+        firefox_options.add_argument("--headless") #starting firefox in headless mode
+        firefox_options.add_argument("--mute-audio") #starting firefox without audio
         firefox_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+        #initializing driver with options
+        p = currentpath + '/drivers/geckodriver_arm7'
+        return webdriver.Firefox(executable_path = p, firefox_options = firefox_options)
+        print("Drivers for RaspberryPi has been initialized succesfully!")
 
-        #initializing the driver for RPi
-        p = os.getcwd() + '/drivers/geckodriver_arm7'
-        return webdriver.Firefox(executable_path=p, firefox_options=firefox_options)
-
-    else:
-        #adding user agent and headless argument to browser
+    else: #enters here if device is not a RPi
+        #creating a chrome options object that is later going to be attached with the driver!
         from selenium.webdriver.chrome.options import Options
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--mute-audio")
         chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+        #choosing and initializing driver based on OS
+        if 'Linux' in (platform):
+            return webdriver.Chrome(currentpath +'/drivers/chromedriver_linux',chrome_options = chrome_options)
+            print("Drivers for Linux has been initialized succesfully!")
+        elif 'Windows' in (platform):
+            return webdriver.Chrome(currentpath +'/drivers/chromedriver.exe',chrome_options = chrome_options)
+            print("Drivers for Windows has been initialized succesfully!")
+        elif 'Darwin' in (platform):
+            return webdriver.Chrome(currentpath +'/drivers/chromedriver_mac',chrome_options = chrome_options)
+            print("Drivers for OSX has been initialized succesfully!")
 
-        #choosing chrome driver based on OS and initializing it for further use
-        if 'Linux' in (platform.system()):
-            return webdriver.Chrome(os.getcwd()+'/drivers/chromedriver_linux',chrome_options=chrome_options)
-        elif 'Windows' in (platform.system()):
-            return webdriver.Chrome(os.getcwd()+'/drivers/chromedriver.exe',chrome_options=chrome_options)
-        elif 'Darwin' in (platform.system()):
-            return webdriver.Chrome(os.getcwd()+'/drivers/chromedriver_mac',chrome_options=chrome_options)
 
 #get_input is a function gets information from the user
 def get_input():
@@ -94,13 +109,13 @@ def randomsite():
 
 #function to randomly visit a subreddit and then browse some posts
 def randomreddit():
-    driver.get("https://reddit.com/r/random")
+    driver.get("http://reddit.com/r/random")
     url = driver.current_url+"top/.json?count=10"
     req = urllib2.Request(url, headers={ 'User-Agent': 'Mozilla/5.0' })
     posts = json.loads(urllib2.urlopen(req).read())
     leng = len(posts['data']['children'])
     for i in range(0,leng):
-        driver.get("https://reddit.com"+posts['data']['children'][i]['data']['permalink'])
+        driver.get("http://reddit.com"+posts['data']['children'][i]['data']['permalink'])
         print "currently on site: " + driver.current_url
         time.sleep(randint(0,5))
     print "currently on site: " + driver.current_url
