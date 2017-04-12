@@ -1,7 +1,7 @@
 #necessary imports for ScatterFly
 from selenium.webdriver.common.action_chains import ActionChains
 import os, sys, time, urllib2, platform, json
-from random import choice, randint
+from random import choice, randint, SystemRandom
 from selenium import webdriver
 import sqlite3 as sql
 import bs4 as bs
@@ -22,7 +22,7 @@ with open(currentpath + '/data/nounlist.txt') as data:
 
 #function that returns a random word from the list
 def get_random_word():
-    return words[randint(0,len(words))]
+    return words[random.SystemRandom().randint(0,len(words))]
 
 
 #function to check and initialize drivers based on system
@@ -129,7 +129,7 @@ def obtain_data():
                 datapath = os.path.expanduser('~')+winpath
 
         if datapath is not NULL:
-            print("Data has been found! Now loading data...")
+            print("Data has been found!")
         else:
             datapath = input("There was an error finding the data, if you have installed"+browser+"in a non default directory please input the path to the directory or type 'X' to exit")
             if datapath == 'X':
@@ -140,8 +140,14 @@ def obtain_data():
                 get_chrome_data()
             print("Attempting to find data...")
 
-        files = os.listdir(datapath)
-        history_db = os.path.join(data_path, '/History')
+    print("Loading data for Processing..")
+    files = os.listdir(datapath)
+    history_db = os.path.join(data_path, '/History')
+    c = sql.connect(history_db)
+    cursor = c.cursor()
+    select_statement = "SELECT urls.url, urls.visit_count FROM urls, visits WHERE urls.id = visits.url;"
+    cursor.execute(select_statement)
+    results = cursor.fetchall()
 
 
 
