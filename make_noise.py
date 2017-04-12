@@ -88,25 +88,53 @@ def request_user_data():
         print("\nScatterFly has been denied permission to access data, ScatterFly will continue running.")
         obfuscate("empty")
 
+def get_browser():
+        browser = input("Are you using Chrome or Firefox? -- Enter C for Chrome, F for Firefox. Press X to exit.")
+        if browser == 'F':
+            return("Firefox")
+        elif browser == 'C':
+            return("Chrome")
+        elif browser == 'X':
+            sys.exit(1)
+            return("Exit")
+        else:
+            while(1):
+            print("Invalid input! Please try again!")
+            get_browser()
+
 #function that obtains data from browser
 def obtain_data():
+    browser = get_browser()
     datapath = NULL
+    chromewinpath = '/AppData/Local/Google/Chrome/User Data/Default'
+    chromelinuxpath = '/.config/google-chrome/Default'
+    chromemacpath = '/Library/Application Support/Google/Chrome/Default'
     def get_chrome_data():
-        if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
-            print("Please copy all the data from your browser user data folder and place it in the root directory of the file in the folder called data")
-        if "Darwin" in sysplatform:
-            datapath = os.path.expanduser('~')+'/Library/Application Support/Google/Chrome/Default'
-        if "Linux" in sysplatform:
-            datapath = os.path.expanduser('~')+'/.config/google-chrome/Default'
-        if "Windows" in sysplatform:
-            datapath = os.path.expanduser('~')+'/AppData/Local/Google/Chrome/User Data/Default'
+        if datapath is NULL:
+            if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
+                print("Please copy all the data from your browser user data folder and place it in the root directory of the file in the folder called data")
+            if "Darwin" in sysplatform:
+                datapath = os.path.expanduser('~')+'/Library/Application Support/Google/Chrome/Default'
+            if "Linux" in sysplatform:
+                datapath = os.path.expanduser('~')+'/.config/google-chrome/Default'
+            if "Windows" in sysplatform:
+                datapath = os.path.expanduser('~')+'/AppData/Local/Google/Chrome/User Data/Default'
 
-        if datapath not NULL:
-            print("Data has been found! Now reading data...")
+        if datapath is not NULL:
+            print("Data has been found! Now loading data...")
         else:
-            datapath = input("There was an error finding the data, if you have installed Chrome in a non default directory please input the path to the directory")
-            get_chrome_data()
+            datapath = input("There was an error finding the data, if you have installed"+browser+"in a non default directory please input the path to the directory or type 'X' to exit")
+            if datapath == 'X':
+                print("Exiting ScatterFly!")
+                time.sleep(0.5)
+                sys.exit(1)
+            else:
+                get_chrome_data()
             print("Attempting to find data...")
+
+
+
+
 
 #get_input is a function gets information from the user
 def get_input():
