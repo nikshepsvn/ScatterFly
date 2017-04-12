@@ -73,7 +73,7 @@ def request_user_data():
     print("Please keep in mind ScatterFly is extremely secure and will not comprimise this data in anyway or form since this data will never leave your machine.")
     permission = input("ScatterFly is requesting permission to acess user data, type 'Yes' to grant permissions or 'No' to deny permission.")
 
-    if permission == "Yes" || permission == "yes" || permission ="y" || permission =="Y":
+    if permission == "Yes" or permission == "yes" or permission ="y" or permission =="Y":
         print("ScatterFly will now analyze your data to make it's obfuscation more intelligent")
         activity_data = process_data()
         obfuscate(activity_data)
