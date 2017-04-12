@@ -30,10 +30,11 @@ def start_drivers():
     if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
         #if user is running on raspberrypi and hasnt set up xvfb properly print instruction on how to set up and exit code
         if not os.getenv('DISPLAY'):
-            print("Please make sure that your virtual display is currently running and try again!")
-            print("Xvfb :99 -ac &")
-            print("export DISPLAY=:99")
-            print("Exiting Program...")
+            print("Please make sure that your virtual display is setup correctly and try again!")
+            print("Make sure you have executed the following commands: ")
+            print("1. xvfb :99 -ac &")
+            print("2. export DISPLAY=:99")
+            print("Now exiting Program...")
             sys.exit(1)
 
         #adding options to firefox driver
@@ -65,6 +66,20 @@ def start_drivers():
             return webdriver.Chrome(currentpath +'/drivers/chromedriver_mac',chrome_options = chrome_options)
             print("Drivers for OSX has been initialized succesfully!")
 
+
+def request_user_data():
+    print("ScatterFly can use your previous data to make its ability to obfuscate and generate noise more accurate.")
+    print("This requires you to give ScatterFly permission to access your previous browsing history.")
+    print("Please keep in mind ScatterFly is extremely secure and will not comprimise this data in anyway or form since this data will never leave your machine.")
+    permission = input("ScatterFly is requesting permission to acess user data, type 'Yes' to grant permissions or 'No' to deny permission.")
+
+    if permission == "Yes" || permission == "yes" || permission ="y" || permission =="Y":
+        print("ScatterFly will now analyze your data to make it's obfuscation more intelligent")
+        activity_data = process_data()
+        obfuscate(activity_data)
+    else:
+        print("ScatterFly has been denied permission to access data, ScatterFly will continue running.")
+        obfuscate("empty")
 
 #get_input is a function gets information from the user
 def get_input():
