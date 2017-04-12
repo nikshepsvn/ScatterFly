@@ -3,7 +3,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 import os, sys, time, urllib2, platform, json
 from random import choice, randint
 from selenium import webdriver
+import sqlite3 as sql
 import bs4 as bs
+
 
 
 #declaring variable to store current directory path for future use
@@ -98,27 +100,33 @@ def get_browser():
             sys.exit(1)
             return("Exit")
         else:
-            while(1):
-            print("Invalid input! Please try again!")
-            get_browser()
+            return("Invalid")
 
 #function that obtains data from browser
 def obtain_data():
     browser = get_browser()
     datapath = NULL
-    chromewinpath = '/AppData/Local/Google/Chrome/User Data/Default'
-    chromelinuxpath = '/.config/google-chrome/Default'
-    chromemacpath = '/Library/Application Support/Google/Chrome/Default'
+    if browser == "Chrome":
+        winpath = '/AppData/Local/Google/Chrome/User Data/Default'
+        linuxpath = '/.config/google-chrome/Default'
+        macpath = '/Library/Application Support/Google/Chrome/Default'
+        get_chrome_data()
+    elif browser == "Firefox"
+        winpath = '/AppData/Roaming/Mozilla/Firefox/Profiles'
+        linuxpath = "/.mozilla/firefox/"
+        macpath = '/Library/Application Support/Firefox/Profiles/'
+        get_firefox_data()
+
     def get_chrome_data():
         if datapath is NULL:
             if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
                 print("Please copy all the data from your browser user data folder and place it in the root directory of the file in the folder called data")
             if "Darwin" in sysplatform:
-                datapath = os.path.expanduser('~')+'/Library/Application Support/Google/Chrome/Default'
+                datapath = os.path.expanduser('~')+macpath
             if "Linux" in sysplatform:
-                datapath = os.path.expanduser('~')+'/.config/google-chrome/Default'
+                datapath = os.path.expanduser('~')+linuxpath
             if "Windows" in sysplatform:
-                datapath = os.path.expanduser('~')+'/AppData/Local/Google/Chrome/User Data/Default'
+                datapath = os.path.expanduser('~')+winpath
 
         if datapath is not NULL:
             print("Data has been found! Now loading data...")
@@ -131,6 +139,9 @@ def obtain_data():
             else:
                 get_chrome_data()
             print("Attempting to find data...")
+
+        files = os.listdir(datapath)
+        history_db = os.path.join(data_path, '/History')
 
 
 
