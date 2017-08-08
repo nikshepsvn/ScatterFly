@@ -53,6 +53,7 @@ The difference between the above project and ScatterFly is that ScatterFly can b
 5) Add feature to Obfuscate torrent and tracker data as well! :O
 6) Enable feature to track bandwith usage and time running.
 7) Enable "DeepDive" feature for sites by clicking links within the same domain on a page
+8) Modularize Code
 
 ### DONE:
 1̶)̶ ̶F̶i̶n̶i̶s̶h̶ ̶o̶t̶h̶e̶r̶ ̶c̶o̶m̶m̶o̶n̶ ̶s̶i̶t̶e̶ ̶r̶a̶n̶d̶o̶m̶i̶z̶e̶r̶s̶.̶ (currently only facebook, tumblr, amazon, ebay, youtube and reddit!)
