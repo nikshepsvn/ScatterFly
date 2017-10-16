@@ -32,7 +32,10 @@ $ python make_noise.py              # make some noise!
   <br>   ScatterFly Running 
 </p>
 
-### Current Version V0.06
+### Current Status
+Taking a step back to think over and form a proper roadmap for the project.
+
+### Last Version V0.06
 - V0.06 Changelog : major changes, added amazon, tumblr and youtube!
 - V0.05 Changelog : code clean up and modularization
 - V0.04 Changelog : added feature for bot to create noise on ebay -- making shopping data from ebay harder to analyze.
@@ -46,7 +49,7 @@ The difference between the above project and ScatterFly is that ScatterFly can b
 
 
 ### TODO:
-1) Use DeepLearning to generate User Profile.
+1) Use Data Analysis to generate User Profile.
 2) Make ScatterFly Hook up to existing browser instance.
 3) Reduce and replace dependencies as much as possible (urlroullete and other 3rd party sites)
 4) Click on all ads on any particular website to give more false leads
