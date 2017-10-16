@@ -62,3 +62,10 @@ The difference between the above project and ScatterFly is that ScatterFly can b
 1̶)̶ ̶F̶i̶n̶i̶s̶h̶ ̶o̶t̶h̶e̶r̶ ̶c̶o̶m̶m̶o̶n̶ ̶s̶i̶t̶e̶ ̶r̶a̶n̶d̶o̶m̶i̶z̶e̶r̶s̶.̶ (currently only facebook, tumblr, amazon, ebay, youtube and reddit!)
 
 ### Feel free to email me @ nikshepsvn@gmail.com if you have some feedback/suggestions!
+
+# Throwback to how ScatterFly came to be
+<p align="center">
+  <img src = "https://i.imgur.com/3k4gItc.png" />
+</p>
+
+
