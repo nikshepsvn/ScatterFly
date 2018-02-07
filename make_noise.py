@@ -1,12 +1,16 @@
 #necessary imports for ScatterFly
 from selenium.webdriver.common.action_chains import ActionChains
-import os, sys, time, urllib2, platform, json
+import os, sys, time, platform, json
 from random import choice, randint, SystemRandom
 from selenium import webdriver
 import sqlite3 as sql
 import bs4 as bs
-
-
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
+import functools
+print = functools.partial(print, flush=True)
 
 #declaring variable to store current directory path for future use
 currentpath = os.getcwd()
@@ -31,7 +35,7 @@ def start_drivers():
     #if user is using RPi, make sure that the virtual display has been setup or else exit
 
     if 'raspberrypi' in platform.uname() or 'armv7l' == platform.machine():
-        #if user is running on raspberrypi and hasnt set up xvfb properly print instruction on how to set up and exit code
+        #if user is running on raspberrypi and hasnt set up xvfb properly print(instruction on how to set up and exit code
         if not os.getenv('DISPLAY'):
             print("\nPlease make sure that your virtual display is setup correctly and try again!")
             print("\nMake sure you have executed the following commands: ")
@@ -111,7 +115,7 @@ def obtain_data():
         linuxpath = '/.config/google-chrome/Default'
         macpath = '/Library/Application Support/Google/Chrome/Default'
         get_chrome_data()
-    elif browser == "Firefox"
+    elif browser == "Firefox":
         winpath = '/AppData/Roaming/Mozilla/Firefox/Profiles'
         linuxpath = "/.mozilla/firefox/"
         macpath = '/Library/Application Support/Firefox/Profiles/'
@@ -148,6 +152,7 @@ def obtain_data():
     select_statement = "SELECT urls.url, urls.visit_count FROM urls, visits WHERE urls.id = visits.url;"
     cursor.execute(select_statement)
     results = cursor.fetchall()
+    print(results)
 
 
 
@@ -156,13 +161,13 @@ def obtain_data():
 #get_input is a function gets information from the user
 def get_input():
     #asking user for input on which sites users browse to improve ScatterFly's ability to contaminate the data
-    print '''\nPlease select which of these sites you visit most often \n(choose all that is applicable and input S when finished):\n
-    1. Reddit
-    2. YouTube
-    3. Tumblr
-    4. Amazon
-    5. Ebay
-    '''
+    print("Please select which of these sites you visit most often (choose all that is applicable and input 0 when finished):")
+    print("1. Reddit")
+    print("2. YouTube")
+    print("3. Tumblr")
+    print("4. Amazon")
+    print("5. Ebay")
+
 
     #creating an AL link user input and functions
     sites_dict = {
@@ -177,13 +182,13 @@ def get_input():
     #loop to input the data
     # start with randomsite as default
     linklist = ['0']
-    while(1):
-        x = raw_input()
-        if (x != "S"):
-            linklist.append(x)
-        else:
-            print "You have succesfully entered " + (str(len(linklist)-1)) + " sites."
+    while(True):
+        x = input()
+        if x == '0':
+            print("You have succesfully entered " + (str(len(linklist)-1)) + " sites.")
             break;
+        else:
+            linklist.append(x)
 
     return linklist, sites_dict
 
@@ -193,20 +198,20 @@ def randomsite():
     site = "http://www.uroulette.com/visit/quprs"
     driver.get(site)
     time.sleep(randint(0,7))
-    print "currently on site: " + driver.current_url
+    print("currently on site: " + driver.current_url)
 
 #function to randomly visit a subreddit and then browse some posts
 def randomreddit():
     driver.get("http://reddit.com/r/random")
-    url = driver.current_url+"top/.json?count=10"
+    url = driver.current_url+"top/.json?count=10";
     req = urllib2.Request(url, headers={ 'User-Agent': 'Mozilla/5.0' })
     posts = json.loads(urllib2.urlopen(req).read())
     leng = len(posts['data']['children'])
     for i in range(0,leng):
         driver.get("http://reddit.com"+posts['data']['children'][i]['data']['permalink'])
-        print "currently on site: " + driver.current_url
+        print("currently on site: " + driver.current_url)
         time.sleep(randint(0,5))
-    print "currently on site: " + driver.current_url
+    print("currently on site: " + driver.current_url)
     time.sleep(randint(0,4))
 
 def random_youtube():
@@ -221,7 +226,7 @@ def random_youtube():
         actions.send_keys('K')
         actions.perform()
         time.sleep(randint(15,50))
-        print "currently on site: " + driver.current_url
+        print("currently on site: " + driver.current_url)
         count = count +1
         if count == iterations:
             break;
@@ -236,7 +241,7 @@ def random_tumblr():
         element = driver.find_element_by_class_name('indash_header_wrapper')
         element.click()
         time.sleep(randint(5,14))
-        print "currently on site: " + driver.current_url
+        print("currently on site: " + driver.current_url)
         count = count +1
         if count == iterations:
             break;
@@ -250,7 +255,7 @@ def random_amazon():
         element = driver.find_element_by_class_name('s-access-detail-page')
         element.click()
         time.sleep(randint(2,7))
-        print "currently on site: " + driver.current_url
+        print("currently on site: " + driver.current_url)
         count = count +1
         if count == iterations:
             break;
@@ -266,7 +271,7 @@ def random_ebay():
         element = driver.find_element_by_class_name('vip')
         element.click()
         time.sleep(randint(2,7))
-        print "currently on site: " + driver.current_url
+        print("currently on site: " + driver.current_url)
         count = count +1
         if count == iterations:
             break;
@@ -283,5 +288,5 @@ def start_noise(linklist, sites_dict):
 if __name__ == "__main__":
     driver = start_drivers()
     linklist, sites_dict = get_input()
-    print "ScatterFly is now going to start generating some random traffic."
+    print("ScatterFly is now going to start generating some random traffic.")
     start_noise(linklist, sites_dict)
